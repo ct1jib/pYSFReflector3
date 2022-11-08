@@ -1,18 +1,23 @@
 # pYSFReflector3
-pYSF3 is a YSF C4FM Multi-stream reflector with DG ID management, open source, written in python3. It needs some libraries that you can install with "pip". It is important that you have sufficient knowledge of linux to install python3 and what is necessary on your server. Manually run the reflector before setting it in the service so that you can view the libraries not present and add them. At the end when everything starts regularly, and you have configured the .ini file you can create and manage the service for the start / stop / restart. please ask to network sysop before starting bridges or similar, if you are planning to manage.
+pYSF3 is a YSF C4FM Multi-stream reflector with DG ID management, open source, written in python3. It needs some libraries that you can install with "pip". It is important that you have sufficient knowledge of linux to install python3 and what is necessary on your server. Manually run the reflector before setting it in the service so that you can view the libraries not present and add them. At the end when everything starts regularly, and you have configured the .ini file you can create and manage the service for the start / stop / restart. please ask to network sysop before starting bridges or similar, if you are planning to manage. Remember Debian10 have python but version 2.7. 
 
-for pYSF3 you need (debian distro):
+for pYSF3 you need (debian10 distro):
 
 python3 latest version and libs, so:<br>
+<br>
 sudo apt update<br>
-sudo apt install python3 python3-pip<br>
-sudo pip install aprslib<br>
-sudo pip install tinydb<br>
+sudo apt install python3 python3-pip php-sqlite3<br>
+sudo pip3 install aprslib<br>
+sudo pip3 install tinydb<br>
 
-than chmod +x YSFReflector<br>
+From the github installation in the 'dashboard' folder there are two folders, copy the collector3.py file from the 'collector3' folder to your installation.
+
+chmod +x YSFReflector<br>
+chmod +x collector3.py<br>
+chmod +x dgid.json<br>
 and setup the service
 
-we recommend installing the reflector under the /opt/pysfreflector directory as well as the accessory software (the .ini file).
+we recommend installing the reflector under the /opt/pysfreflector directory as well as the accessory software (the .ini the collector3.py file).
 
 the configuration file is documented internally, ultimately it is necessary to carefully configure the various sections such as the description and name of the reflector and the path for the log. The network section concerns the listening port (as configured in the ysf world database register) of the reflector, and the json port for communication towards the collector / dashboard. A complete and functional block list (in time reload) to limit disturbances is managed in the /opt/pysfreflector/deny.db file: CS:call (block callsign), AL:call (allowed)...
 See first pYSF version on https://github.com/iu5jae/pYSFReflector#muting-matrix and the file ACL_rules.txt for infos
